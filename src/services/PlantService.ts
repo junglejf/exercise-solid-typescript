@@ -39,6 +39,11 @@ class PlantService {
     const newPlant = await this.model.savePlant(plant);
     return newPlant;
   }
+
+  public async getPlantsThatNeedsSun(): Promise<IPlant[]> {
+    const plants = await this.model.getPlantsThatNeedsSun();
+    return plants;
+  }
 }
 
 export default PlantService;

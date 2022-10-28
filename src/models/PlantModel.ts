@@ -61,6 +61,14 @@ class PlantModel {
     };
     return newPlant;
   }
+
+  public async getPlantsThatNeedsSun() {
+    const [rows] = await this.conn
+      .execute('SELECT * FROM plants WHERE waterFrequency > 2');
+
+    const plants = rows as IPlant[];
+    return plants;
+  }
 }
 
 export default PlantModel;

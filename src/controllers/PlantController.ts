@@ -27,7 +27,7 @@ class PlantController {
     const { id } = req.params;
     try {
       const plant = await this.service.removeById(id);
-      return res.status(200).json(plant);
+      return res.status(204).json(plant);
     } catch (error) {
       next(error);
     }
@@ -46,6 +46,15 @@ class PlantController {
   public async create(req: Request, res: Response, next: NextFunction) {
     try {
       const plant = await this.service.savePlant(req.body);
+      return res.status(201).json(plant);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public async getPlantsThatNeedsSun(_req: Request, res: Response, next: NextFunction) {
+    try {
+      const plant = await this.service.getPlantsThatNeedsSun();
       return res.status(201).json(plant);
     } catch (error) {
       next(error);
