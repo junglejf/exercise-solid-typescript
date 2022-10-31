@@ -1,1 +1,1 @@
-export { IPlant, ICreatePlant } from './IPlant';
+export { IPlant, INewPlant } from './IPlant';

@@ -1,6 +1,6 @@
 import { ResultSetHeader } from 'mysql2';
 import connection from './connection';
-import { IPlant, ICreatePlant } from '../interfaces';
+import { IPlant } from '../interfaces';
 
 class PlantModel {
   private conn = connection;
@@ -34,19 +34,19 @@ class PlantModel {
     return removedPlant;
   }
 
-  public async editPlant(plantId: string, plant: ICreatePlant): Promise<IPlant> {
+  public async editPlant(plant: IPlant): Promise<IPlant> {
     const {
-      breed, needsSun, origin, size, waterFrequency,
+      id, breed, needsSun, origin, size, waterFrequency,
     } = plant;
 
     const query = 'UPDATE plants SET breed = ?, needsSun = ?, origin = ?, size = ?, waterFrequency = ? WHERE id = ?';
-    const values = [breed, needsSun, origin, size, waterFrequency, plantId];
+    const values = [breed, needsSun, origin, size, waterFrequency, id];
     await this.conn.execute(query, values);
 
-    return { id: parseInt(plantId, 10), ...plant };
+    return plant;
   }
 
-  public async savePlant(plant: ICreatePlant) {
+  public async savePlant(plant: Omit<IPlant, 'id'>) {
     const {
       breed, needsSun, origin, size, waterFrequency,
     } = plant;
@@ -64,7 +64,7 @@ class PlantModel {
 
   public async getPlantsThatNeedsSun() {
     const [rows] = await this.conn
-      .execute('SELECT * FROM plants WHERE waterFrequency > 2');
+      .execute('SELECT * FROM plants WHERE needs_sun = true');
 
     const plants = rows as IPlant[];
     return plants;

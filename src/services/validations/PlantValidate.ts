@@ -1,4 +1,4 @@
-import { ICreatePlant } from '../../interfaces';
+import { INewPlant } from '../../interfaces';
 import { BadRequestException } from '../exceptions';
 
 export default class PlantValidate {
@@ -26,17 +26,10 @@ export default class PlantValidate {
     }
   }
 
-  static validateWaterFrequency(waterFrequency: number | undefined): void {
-    if (!waterFrequency && typeof waterFrequency !== 'number') {
-      throw new BadRequestException('Attribute "waterFrequency" must be number.');
-    }
-  }
-
-  static validateAttibutes(plant: ICreatePlant): void {
+  static validateAttibutes(plant: INewPlant): void {
     PlantValidate.validateBreed(plant.breed);
     PlantValidate.validateNeedsSun(plant.needsSun);
     PlantValidate.validateOrigin(plant.origin);
     PlantValidate.validateSize(plant.size);
-    PlantValidate.validateWaterFrequency(plant.waterFrequency);
   }
 }

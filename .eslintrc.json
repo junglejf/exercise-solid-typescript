@@ -19,33 +19,11 @@
     "project": "./tsconfig.json"
   },
   "plugins": [
-    "@typescript-eslint",
-    "sonarjs",
-    "mocha"
+    "@typescript-eslint"
   ],
   "rules": {
-    "no-underscore-dangle": "off",
     "no-console": "off",
-    "camelcase": "warn",
-    "arrow-parens": [
-      2,
-      "always"
-    ],
-    "quotes": [
-      2,
-      "single"
-    ],
-    "implicit-arrow-linebreak": "off",
     "consistent-return": "off",
-    "@typescript-eslint/naming-convention": [
-      "error", { 
-        "selector": "property",
-        "format": ["strictCamelCase"],
-        "filter": {
-        "regex": "^_",
-        "match": false
-      } }
-    ],
     "@typescript-eslint/no-unused-vars": [
       "error",
       {

@@ -4,7 +4,7 @@ export interface IPlant {
   needsSun: boolean,
   origin: string,
   size: number,
-  waterFrequency?: number,
+  waterFrequency: number,
 }
 
-export type ICreatePlant = Omit<IPlant, 'id'>;
+export type INewPlant = Omit<IPlant, 'id' | 'waterFrequency'>;
